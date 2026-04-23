@@ -53,7 +53,7 @@
                                     class="text-[#1A1D1F] dark:text-white text-sm font-normal dark:text-white">Password</label>
                                 <input type="password" id="password" placeholder="Password"  name="password"
                                     class="text-[#1A1D1F] dark:text-white px-2 py-2 pr-10 rounded-[4px] border border-[#E5E7EB] dark:border-[#2B2B2B]! outline-none w-full">
-                                <img src="{{asset('build/assets/images/icons/eye.svg')}}" alt="" onclick="togglePasswordVisibility()"
+                                <img src="{{asset('build/assets/images/icons/eye-off.svg')}}" alt="" onclick="togglePasswordVisibility()"
                                     class="absolute right-2 top-[38px] cursor-pointer w-5 h-5 dark:text-white!"> 
                                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                             </div>
