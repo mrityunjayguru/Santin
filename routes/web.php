@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ArtController;
+use App\Http\Controllers\DownloadArtController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,8 +19,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // bulk-upload
-    Route::get('/bulk-upload', [ProfileController::class, 'edit'])->name('bulk-upload');
+    // art
+    Route::get('/art', [ArtController::class, 'index'])->name('art.index');
+    Route::get('/art/create', [ArtController::class, 'create'])->name('art.create');
+    Route::get('/bulk-upload', [ArtController::class, 'edit'])->name('bulk-upload');
+    
+    //download-art
+    Route::get('/download-art', [DownloadArtController::class, 'index'])->name('download-art.index');
+
+    //users
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
 });
 
 require __DIR__.'/auth.php';
