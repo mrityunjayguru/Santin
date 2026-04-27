@@ -24,6 +24,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/art/create', [ArtController::class, 'create'])->name('art.create');
     Route::get('/bulk-upload', [ArtController::class, 'edit'])->name('bulk-upload');
     Route::post('/bulk-upload', [ArtController::class, 'bulkUpload'])->name('bulk-upload.store');
+
+    // art download
+    Route::get('/art/{art}/download', [ArtController::class, 'downloadSingle'])->name('art.download.single');
+    Route::post('/art/download/bulk', [ArtController::class, 'downloadBulk'])->name('art.download.bulk');
     
     //download-art
     Route::get('/download-art', [DownloadArtController::class, 'index'])->name('download-art.index');

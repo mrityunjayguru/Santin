@@ -22,6 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const activeClasses = ['bg-[#2B2B2B]', 'text-white'];
     const inactiveClasses = ['hover:bg-gray-200'];
 
+    // Set page title based on active nav link
+    const activeLink = Array.from(navLinks).find(link => link.classList.contains('bg-[#2B2B2B]'));
+    if (activeLink && pageTitle) {
+        pageTitle.textContent = activeLink.getAttribute('data-title') || 'Dashboard';
+    }
+
     const toggleSidebar = () => {
         sidebar.classList.toggle('-translate-x-full');
         sidebarOverlay.classList.toggle('hidden');
@@ -31,33 +37,4 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleSidebar);
     if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', toggleSidebar);
     if (sidebarOverlay) sidebarOverlay.addEventListener('click', toggleSidebar);
-
-    // navLinks.forEach(link => {
-    //     link.addEventListener('click', (e) => {
-    //         // e.preventDefault();
-    //         navLinks.forEach(l => {
-    //             l.classList.remove(...activeClasses);
-    //             l.classList.add(...inactiveClasses);
-    //             const icon = l.querySelector('.nav-icon');
-    //             if (icon) {
-    //                 icon.classList.remove('invert');
-    //                 icon.classList.add('opacity-70');
-    //             }
-    //         });
-    //         link.classList.add(...activeClasses);
-    //         link.classList.remove(...inactiveClasses);
-    //         const clickedIcon = link.querySelector('.nav-icon');
-    //         if (clickedIcon) {
-    //             clickedIcon.classList.add('invert');
-    //             clickedIcon.classList.remove('opacity-70');
-    //         }
-    //         const title = link.getAttribute('data-title');
-    //         if (title && pageTitle) {
-    //             pageTitle.textContent = title;
-    //         }
-    //         if (window.innerWidth < 1024) {
-    //             toggleSidebar();
-    //         }
-    //     });
-    // });
 });

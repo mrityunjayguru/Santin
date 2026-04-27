@@ -28,11 +28,24 @@
     </div>
     <div class="flex items-center space-x-2 md:space-x-3 w-full lg:w-auto">
       <a href="{{ route('art.create') }}"
-        class="flex-1  lg:flex-none text-center px-4 md:px-6 py-3 bg-[#2B2B2B] text-white rounded-full text-xs md:text-sm font-medium  hover:bg-[#3B3B3B] transition-colors">Add
+        class="flex-1 lg:flex-none text-center px-4 md:px-6 py-3 bg-[#2B2B2B] text-white rounded-full text-xs md:text-sm font-medium hover:bg-[#3B3B3B] transition-colors">Add
         New</a>
-      <button
-        class="flex-1 lg:flex-none px-4 md:px-6 py-3 bg-white cursor-pointer border border-[#2B2B2B] rounded-full text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors">Bulk
-        Upload</button>
+      <a href="{{ route('bulk-upload') }}"
+        class="flex-1 lg:flex-none text-center px-4 md:px-6 py-3 bg-white border border-[#2B2B2B] rounded-full text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors">Bulk
+        Upload</a>
+      {{-- Bulk Download button — visible when items are selected --}}
+      <form id="bulk-download-form" action="{{ route('art.download.bulk') }}" method="POST" class="hidden">
+        @csrf
+        <div id="bulk-download-inputs"></div>
+        <button type="submit"
+          class="flex items-center gap-2 px-4 md:px-6 py-3 bg-[#4A6FFF] text-white rounded-full text-xs md:text-sm font-medium hover:bg-blue-600 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+          Download Selected (<span id="selected-count">0</span>)
+        </button>
+      </form>
     </div>
   </div>
   <!-- Filters -->
@@ -300,26 +313,26 @@
     <table class="min-w-full text-sm text-[#2B2B2B]" style="border-collapse: separate; border-spacing: 0;">
       <thead class="bg-white">
         <tr>
-          <th
-            class="px-5 py-4 text-left text-[13px] font-medium text-[#9CA3AF] rounded-tl-xl border-b border-[#D1D5DB]">
-            Title</th>
+          <th class="px-3 py-4 text-center text-[13px] font-medium text-[#9CA3AF] rounded-tl-xl border-b border-[#D1D5DB] w-12">
+            <input type="checkbox" id="select-all-list" class="rounded border-gray-300 text-[#2B2B2B] focus:ring-[#2B2B2B] w-4 h-4">
+          </th>
+          <th class="px-5 py-4 text-left text-[13px] font-medium text-[#9CA3AF] border-b border-[#D1D5DB]">Title</th>
           <th class="px-5 py-4 text-left text-[13px] font-medium text-[#9CA3AF] border-b border-[#D1D5DB]">Artist</th>
           <th class="px-5 py-4 text-left text-[13px] font-medium text-[#9CA3AF] border-b border-[#D1D5DB]">Medium</th>
           <th class="px-5 py-4 text-left text-[13px] font-medium text-[#9CA3AF] border-b border-[#D1D5DB]">Location</th>
-          <th class="px-5 py-4 text-left text-[13px] font-medium text-[#9CA3AF] border-b border-[#D1D5DB]">Ownership
-          </th>
+          <th class="px-5 py-4 text-left text-[13px] font-medium text-[#9CA3AF] border-b border-[#D1D5DB]">Ownership</th>
           <th class="px-5 py-4 text-left text-[13px] font-medium text-[#9CA3AF] border-b border-[#D1D5DB]">Type</th>
           <th class="px-5 py-4 text-left text-[13px] font-medium text-[#9CA3AF] border-b border-[#D1D5DB]">Art ID</th>
-          <th class="px-5 py-4 text-center text-[13px] font-medium text-[#9CA3AF] border-b border-[#D1D5DB]">Preview
-          </th>
-          <th
-            class="px-5 py-4 text-right text-[13px] font-medium text-[#9CA3AF] rounded-tr-xl border-b border-[#D1D5DB]">
-          </th>
+          <th class="px-5 py-4 text-center text-[#13px] font-medium text-[#9CA3AF] border-b border-[#D1D5DB]">Preview</th>
+          <th class="px-5 py-4 text-right text-[13px] font-medium text-[#9CA3AF] rounded-tr-xl border-b border-[#D1D5DB]"></th>
         </tr>
       </thead>
       <tbody>
         <!-- Row 1 -->
         <tr class="hover:bg-[#FAFAFA] transition-colors">
+          <td class="px-3 py-4 text-center border-b border-[#D1D5DB]">
+            <input type="checkbox" class="art-select-checkbox rounded border-gray-300 text-[#2B2B2B] focus:ring-[#2B2B2B] w-4 h-4" data-art-id="1">
+          </td>
           <td class="px-5 py-4 font-medium text-[#374151] border-b border-[#D1D5DB]">The Starry Night</td>
           <td class="px-5 py-4 text-[#4B5563] border-b border-[#D1D5DB]">Vincent van Gogh</td>
           <td class="px-5 py-4 text-[#4B5563] border-b border-[#D1D5DB]">Oil on canvas</td>
@@ -366,6 +379,9 @@
 
         <!-- Row 2 -->
         <tr class="hover:bg-[#FAFAFA] transition-colors">
+          <td class="px-3 py-4 text-center border-b border-[#D1D5DB]">
+            <input type="checkbox" class="art-select-checkbox rounded border-gray-300 text-[#2B2B2B] focus:ring-[#2B2B2B] w-4 h-4" data-art-id="2">
+          </td>
           <td class="px-5 py-4 font-medium text-[#374151] border-b border-[#D1D5DB]">The Young Hare</td>
           <td class="px-5 py-4 text-[#4B5563] border-b border-[#D1D5DB]">Albrecht Dürer</td>
           <td class="px-5 py-4 text-[#4B5563] border-b border-[#D1D5DB]">Watercolour on paper</td>
@@ -412,6 +428,9 @@
 
         <!-- Row 3 -->
         <tr class="hover:bg-[#FAFAFA] transition-colors">
+          <td class="px-3 py-4 text-center">
+            <input type="checkbox" class="art-select-checkbox rounded border-gray-300 text-[#2B2B2B] focus:ring-[#2B2B2B] w-4 h-4" data-art-id="3">
+          </td>
           <td class="px-5 py-4 font-medium text-[#374151] rounded-bl-xl">The Starry Night</td>
           <td class="px-5 py-4 text-[#4B5563]">Vincent van Gogh</td>
           <td class="px-5 py-4 text-[#4B5563]">Oil on canvas</td>
@@ -667,19 +686,7 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
         </div>
-        <div class="flex items-center space-x-2 md:space-x-3 w-full lg:w-auto">
-            <a href="{{ route('art.create') }}"
-                class="flex-1 lg:flex-none px-4 md:px-6 py-3 bg-[#2B2B2B] text-white rounded-full text-xs md:text-sm font-medium  hover:bg-[#3B3B3B] transition-colors">Add
-                New</a>
-            {{-- <button class="flex-1 lg:flex-none px-4 md:px-6 py-3 bg-white cursor-pointer border border-[#2B2B2B] rounded-full text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors">Bulk
-                Upload</button> --}}
-            <label
-                class="flex-1 lg:flex-none px-4 md:px-6 py-3 bg-white cursor-pointer border border-[#2B2B2B] rounded-full text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors">
-                Bulk Upload
-                <input type="file" class="hidden" name="file">
-            </label>
-        </div>
-      `;
+      `);
       activeFiltersList.appendChild(dropdownContainer);
 
       const newBtn = dropdownContainer.querySelector('.filter-dropdown-btn');
@@ -742,6 +749,58 @@
     }
   });
 
+  // ── Bulk Download Selection Logic ──────────────────────────────────────────
+  (function () {
+    const bulkForm      = document.getElementById('bulk-download-form');
+    const inputsWrapper = document.getElementById('bulk-download-inputs');
+    const countEl       = document.getElementById('selected-count');
+    const selectAll     = document.getElementById('select-all-list');
+
+    function getChecked() {
+      return Array.from(document.querySelectorAll('.art-select-checkbox:checked'));
+    }
+
+    function updateBulkBar() {
+      const checked = getChecked();
+      if (checked.length > 0) {
+        bulkForm.classList.remove('hidden');
+        countEl.textContent = checked.length;
+        inputsWrapper.innerHTML = '';
+        checked.forEach(cb => {
+          const inp = document.createElement('input');
+          inp.type  = 'hidden';
+          inp.name  = 'art_ids[]';
+          inp.value = cb.dataset.artId;
+          inputsWrapper.appendChild(inp);
+        });
+      } else {
+        bulkForm.classList.add('hidden');
+      }
+    }
+
+    // Row checkboxes
+    document.addEventListener('change', function (e) {
+      if (e.target.classList.contains('art-select-checkbox')) {
+        updateBulkBar();
+        if (selectAll) {
+          const all = document.querySelectorAll('.art-select-checkbox');
+          selectAll.checked = [...all].every(cb => cb.checked);
+          selectAll.indeterminate = !selectAll.checked && [...all].some(cb => cb.checked);
+        }
+      }
+    });
+
+    // Select All
+    if (selectAll) {
+      selectAll.addEventListener('change', function () {
+        document.querySelectorAll('.art-select-checkbox').forEach(cb => {
+          cb.checked = selectAll.checked;
+        });
+        updateBulkBar();
+      });
+    }
+  })();
+
 </script>
 
-    @include('layouts.footer')
+@include('layouts.footer')

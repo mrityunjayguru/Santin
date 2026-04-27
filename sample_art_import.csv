@@ -1,0 +1,4 @@
+artist,images,title,type,size,frame,date,location,ownership,inventory_status,bundle,pkg_quantity,notes
+Vincent van Gogh,https://drive.google.com/file/d/14QuPjuwEsjgr4L_5IuMtU9cpIatpbMmA/view?usp=drive_link,The Starry Night,Painting,73x92 cm,Framed,1889-06-01,New York,MoMA,Available,1,1,Oil on canvas
+Leonardo da Vinci,https://drive.google.com/file/d/14QuPjuwEsjgr4L_5IuMtU9cpIatpbMmA/view?usp=drive_link,Mona Lisa,Painting,77x53 cm,Framed,1503-01-01,Paris,Louvre,Available,1,1,Oil on poplar panel
+Pablo Picasso,https://drive.google.com/file/d/14QuPjuwEsjgr4L_5IuMtU9cpIatpbMmA/view?usp=drive_link,Guernica,Painting,349x776 cm,Unframed,1503-01-01,Madrid,Museo Reina Sofia,Reserved,2,1,Oil on canvas
