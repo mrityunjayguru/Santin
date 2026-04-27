@@ -34,7 +34,7 @@
                                 Login
                             </span>
                         </div>
-                        <div class="text-[#1A1D1F] dark:text-white text-sm font-normal dark:text-white">
+                        <div class="text-[#1A1D1F] dark:text-white text-sm font-normal">
                             Enter your details to sign in to your account
                         </div>
                     </div>
@@ -43,14 +43,14 @@
                         <div class="flex flex-col gap-2">
                             <div class="flex flex-col gap-2">
                                 <label for="email"
-                                    class="text-[#1A1D1F] dark:text-white text-sm font-normal dark:text-white">Email</label>
+                                    class="text-[#1A1D1F] dark:text-white text-sm font-normal">Email</label>
                                 <input type="email" id="email" placeholder="Email ID" name="email"
                                     class="text-[#1A1D1F] dark:text-white px-2 py-2 rounded-[4px] border border-[#E5E7EB] dark:border-[#2B2B2B]! outline-none">
                                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                             </div>
                             <div class="flex flex-col gap-2 relative">
                                 <label for="password"
-                                    class="text-[#1A1D1F] dark:text-white text-sm font-normal dark:text-white">Password</label>
+                                    class="text-[#1A1D1F] dark:text-white text-sm font-normal">Password</label>
                                 <input type="password" id="password" placeholder="Password"  name="password"
                                     class="text-[#1A1D1F] dark:text-white px-2 py-2 pr-10 rounded-[4px] border border-[#E5E7EB] dark:border-[#2B2B2B]! outline-none w-full">
                                 <img src="{{asset('build/assets/images/icons/eye-off.svg')}}" alt="" onclick="togglePasswordVisibility()"
