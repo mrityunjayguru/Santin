@@ -29,11 +29,15 @@
             <a href="{{ route('art.create') }}"
                 class="flex-1 lg:flex-none px-4 md:px-6 py-3 bg-[#2B2B2B] text-white rounded-full text-xs md:text-sm font-medium  hover:bg-[#3B3B3B] transition-colors">Add
                 New</a>
-            <button
-                class="flex-1 lg:flex-none px-4 md:px-6 py-3 bg-white cursor-pointer border border-[#2B2B2B] rounded-full text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors">Bulk
-                Upload</button>
+            {{-- <button class="flex-1 lg:flex-none px-4 md:px-6 py-3 bg-white cursor-pointer border border-[#2B2B2B] rounded-full text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors">Bulk
+                Upload</button> --}}
+            <label
+                class="flex-1 lg:flex-none px-4 md:px-6 py-3 bg-white cursor-pointer border border-[#2B2B2B] rounded-full text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors">
+                Bulk Upload
+                <input type="file" class="hidden" name="file">
+            </label>
         </div>
     </div>
     <!-- Page start Here -->
 
-@include('layouts.footer')
+    @include('layouts.footer')
