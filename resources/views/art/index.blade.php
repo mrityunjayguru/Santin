@@ -667,20 +667,17 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
         </div>
-      `).join('');
-
-      dropdownContainer.innerHTML = `
-        <button class="filter-dropdown-btn flex items-center gap-2 px-4 py-2 bg-[#2B2B2B] hover:bg-[#3B3B3B] text-white text-sm font-medium rounded-full transition-colors">
-          <span>${checkedBoxes.length} Filters</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </button>
-        <div class="filter-menu hidden absolute left-0 top-full mt-2 w-56 bg-white border border-gray-100 rounded-2xl shadow-lg z-50 py-2">
-          ${menuHtml}
-          <div class="px-4 pt-2 mt-2 border-t border-gray-100">
-            <button class="w-full py-1.5 text-xs font-medium text-red-500 hover:text-red-600 transition-colors" onclick="clearAllFilters()">Clear All</button>
-          </div>
+        <div class="flex items-center space-x-2 md:space-x-3 w-full lg:w-auto">
+            <a href="{{ route('art.create') }}"
+                class="flex-1 lg:flex-none px-4 md:px-6 py-3 bg-[#2B2B2B] text-white rounded-full text-xs md:text-sm font-medium  hover:bg-[#3B3B3B] transition-colors">Add
+                New</a>
+            {{-- <button class="flex-1 lg:flex-none px-4 md:px-6 py-3 bg-white cursor-pointer border border-[#2B2B2B] rounded-full text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors">Bulk
+                Upload</button> --}}
+            <label
+                class="flex-1 lg:flex-none px-4 md:px-6 py-3 bg-white cursor-pointer border border-[#2B2B2B] rounded-full text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors">
+                Bulk Upload
+                <input type="file" class="hidden" name="file">
+            </label>
         </div>
       `;
       activeFiltersList.appendChild(dropdownContainer);
@@ -747,4 +744,4 @@
 
 </script>
 
-@include('layouts.footer')
+    @include('layouts.footer')

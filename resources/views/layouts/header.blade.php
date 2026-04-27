@@ -9,6 +9,7 @@
         @yield('page-title')
     </title>
     <script src="{{ asset('build/assets/main.js') }}" defer></script>
+    
 </head>
 
 <body class="bg-white text-gray-800 font-sans flex h-screen overflow-hidden relative px-2 md:px-4">
